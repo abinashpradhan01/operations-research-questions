@@ -856,7 +856,6 @@ Example: For a 2×2 zero-sum game with payoff matrix:
 
 The optimal mixed strategy for row player is (0.625, 0.375) and for column player is (0.5, 0.5), giving game value of 3.25.
 
-
 ### 7. Explain the Maximin and Minimax Criterion.
 
 Maximin and Minimax criteria are decision rules in game theory:
@@ -884,12 +883,14 @@ Maximin and Minimax criteria are decision rules in game theory:
 When maximin value = minimax value, a saddle point exists, representing optimal pure strategies for both players.
 
 Example:
-| B1  | B2  | B3  | Row Min |
+
+        | B1  | B2  | B3  | Row Min |
 --------|-----|-----|-----|---------|
 A1      | 3   | -2  | 4   | -2      |
 A2      | 1   | 6   | -3  | -3      |
-A3      | 0   | 2   |  2  |  0      |
-Col Max | 3   | 6   |  4  |         |
+A3      | 0   | 2   | 2   | 0       |
+--------|-----|-----|-----|---------|
+Col Max | 3   | 6   | 4   |         |
 
 Maximin = max(-2,-3,0) = 0 (row player chooses A3)
 Minimax = min(3,6,4) = 3 (column player chooses B1)
@@ -916,11 +917,13 @@ Key properties:
 
 Example:
 Consider this payoff matrix (row player's payoff):
-| B1  | B2  | B3  |
+
+        | B1  | B2  | B3  |
 --------|-----|-----|-----|
 A1      | 5   | 2   | 7   |
 A2      | 3   | 1   | 4   |
 A3      | 8   | 6   | 9   |
+
 
 Analysis:
 - A3 strictly dominates A1 (8>5, 6>2, 9>7)
@@ -930,29 +933,6 @@ Analysis:
   - B2 dominates B1 (-6<-8, -1<-3, -6<-8)
   - B2 dominates B3 (-6<-9, -1<-4, -6<-9)
 - Solution simplified to (A3,B2) with value 6
-
-### 9. Explain the role of Game Theory in decision-making.
-
-Game Theory provides a framework for strategic decision-making that:
-
-1. **Models Interactive Decisions**: Captures situations where outcome depends on multiple decision-makers
-2. **Quantifies Outcomes**: Assigns numerical values to different outcome scenarios
-3. **Predicts Behavior**: Forecasts how rational players will act
-4. **Identifies Optimal Strategies**: Determines best course of action given constraints
-5. **Evaluates Competitive Situations**: Analyzes situations with conflicting interests
-6. **Demonstrates Rationality Paradoxes**: Shows how individually rational decisions can lead to collectively suboptimal outcomes
-7. **Supports Negotiation**: Provides framework for understanding bargaining positions
-8. **Guides Resource Allocation**: Helps determine efficient distribution of limited resources
-
-Applications in various fields:
-- **Economics**: Market competition, auctions, pricing strategies
-- **Politics**: Voting systems, international relations, coalition formation
-- **Business**: Competitive strategy, market entry decisions
-- **Military**: Conflict resolution, deterrence strategies
-- **Biology**: Evolution, animal behavior, ecosystem dynamics
-- **Computer Science**: Algorithm design, artificial intelligence
-
-Example: Prisoner's Dilemma demonstrates how Game Theory models decision-making. Two suspects must decide whether to confess or remain silent. If both remain silent, they each get 1 year. If both confess, they each get 3 years. If one confesses while the other remains silent, the confessor goes free while the silent one gets 5 years. Despite cooperation (both remaining silent) being collectively optimal, individual rationality leads both to confess, resulting in suboptimal outcome of 3 years each.
 
 ### 10. Describe a 2×2 Game with a suitable example.
 
@@ -971,12 +951,14 @@ A 2×2 game is a strategic interaction between two players where each player has
 Consider two firms (Firm A and Firm B) deciding whether to enter a new market or stay out.
 
 Payoff Matrix (values represent profits in millions):
-|  Firm B   |           |
-      | Enter | Stay Out |
+
+          |     Firm B     |           |
+          | Enter | Stay Out |
 ----------|-------|----------|
 Firm A    |       |          |
 Enter     | 2, 2  |  5, 0    |
 Stay Out  | 0, 5  |  0, 0    |
+
 
 Analysis:
 - If both firms enter, they share the market and each earns $2 million
