@@ -741,3 +741,177 @@ The key trade-off is between computational simplicity (favoring N.W. Corner) and
 
 
 
+
+# Assignment Problem using the Hungarian Method
+
+The Hungarian Method (also known as the Kuhn-Munkres algorithm) is an optimization algorithm that solves the assignment problem in polynomial time. It finds the optimal assignment of n workers to n jobs to minimize the total cost.
+
+## Steps of the Hungarian Method
+
+1. **Create the Cost Matrix**
+   - Arrange the problem as an n×n matrix where each element c_ij represents the cost of assigning worker i to job j.
+   - If the original problem has unequal numbers of workers and jobs, add dummy rows or columns with zero costs.
+
+2. **Row Reduction**
+   - For each row, find the minimum element and subtract it from every element in that row.
+   - This creates at least one zero in each row.
+
+3. **Column Reduction**
+   - For each column in the resulting matrix, find the minimum element and subtract it from every element in that column.
+   - This creates at least one zero in each column.
+
+4. **Cover All Zeros with Minimum Number of Lines**
+   - Draw the minimum number of horizontal and vertical lines needed to cover all zeros in the matrix.
+   - If the number of lines equals n (the dimension of the matrix), an optimal assignment is possible.
+   - If the number of lines is less than n, proceed to the next step.
+
+5. **Create Additional Zeros**
+   - Find the smallest uncovered element.
+   - Subtract this value from all uncovered elements.
+   - Add this value to elements covered by two lines (intersections).
+   - Return to step 4 and repeat until the number of lines equals n.
+
+6. **Make the Optimal Assignment**
+   - Start with rows/columns having exactly one zero.
+   - Assign each worker to a job where there is a zero in the final matrix.
+   - Each worker should be assigned to exactly one job, and each job should have exactly one worker.
+
+7. **Calculate the Total Cost**
+   - Sum the original costs for each worker-job pair in the final assignment.
+
+## Example
+
+Consider a 3×3 cost matrix:
+
+
+| 10 | 5  | 8  |
+| 9  | 6  | 11 |
+| 7  | 12 | 4  |
+
+
+### Step 1-2: Row Reduction
+Subtract the minimum of each row from all elements in that row:
+
+
+| 5 | 0 | 3 |
+| 3 | 0 | 5 |
+| 3 | 8 | 0 |
+
+
+### Step 3: Column Reduction
+Subtract the minimum of each column from all elements in that column:
+
+
+| 2 | 0 | 3 |
+| 0 | 0 | 5 |
+| 0 | 8 | 0 |
+
+
+### Step 4: Cover all zeros with minimum number of lines
+We need 2 lines to cover all zeros, which is less than n=3, so we continue.
+
+### Step 5: Create additional zeros
+The smallest uncovered element is 2. Subtract 2 from all uncovered elements and add 2 to elements at line intersections:
+
+
+| 0 | 0 | 1 |
+| 0 | 2 | 5 |
+| 0 | 10 | 0 |
+
+
+### Step 6: Cover all zeros again
+Now we need 3 lines to cover all zeros, which equals n=3, so we can make the optimal assignment.
+
+### Step 7: Make the optimal assignment
+- Worker 1 → Job 1 or Job 2 (choose Job 2)
+- Worker 2 → Job 1
+- Worker 3 → Job 3
+
+### Step 8: Calculate the total cost
+Total cost = 5 + 9 + 4 = 18
+
+This is the optimal assignment with the minimum total cost.
+
+# Balanced Transportation Problem
+
+A transportation problem involves distributing goods from multiple sources (e.g., factories) to multiple destinations (e.g., warehouses) while minimizing the total transportation cost. A balanced transportation problem is one where the total supply equals the total demand.
+
+## Steps to Solve a Balanced Transportation Problem
+
+1. **Set Up the Problem**
+   - Create a table with m sources (rows) and n destinations (columns).
+   - Fill in the supply values a_i for each source i and demand values b_j for each destination j.
+   - Enter the transportation cost c_ij for each source-destination pair.
+   - Verify that the problem is balanced by checking if total supply equals total demand: Σa_i = Σb_j.
+
+2. **Find an Initial Basic Feasible Solution**
+   This can be done using one of these methods:
+   
+   a) **Northwest Corner Method**
+   - Start at the top-left (northwest) corner of the table.
+   - Allocate as much as possible, limited by either supply or demand.
+   - If supply is exhausted, move right. If demand is satisfied, move down.
+   - Continue until all supply and demand are allocated.
+   
+   b) **Least Cost Method**
+   - Find the cell with the lowest transportation cost.
+   - Allocate as much as possible to this cell.
+   - Adjust remaining supply and demand accordingly.
+   - Continue with the next lowest cost cell until all supply and demand are allocated.
+   
+   c) **Vogel's Approximation Method (VAM)**
+   - For each row and column, find the difference between the two lowest costs.
+   - Select the row or column with the largest difference.
+   - Allocate as much as possible to the lowest cost cell in that row or column.
+   - Adjust remaining supply and demand, and recalculate differences.
+   - Continue until all supply and demand are allocated.
+
+3. **Test for Optimality Using the Stepping Stone Method**
+   - The basic feasible solution should have exactly m+n-1 allocated cells.
+   - For each unallocated cell, create a closed path (stepping stone path) that:
+     * Starts and ends at the unallocated cell
+     * Only turns at allocated cells
+     * Consists of horizontal and vertical segments
+   - Calculate the net cost change for each unallocated cell using this path:
+     * Add the cost of cells at odd-numbered corners
+     * Subtract the cost of cells at even-numbered corners
+   - If all net cost changes are positive or zero, the current solution is optimal.
+   - If any net cost change is negative, the solution can be improved.
+
+4. **Improve the Solution**
+   - Select the unallocated cell with the most negative net cost change.
+   - Find the smallest allocation along the even-numbered corners of its stepping stone path.
+   - Add this quantity to the allocations at odd-numbered corners.
+   - Subtract this quantity from the allocations at even-numbered corners.
+   - The previously unallocated cell now becomes allocated.
+   - One of the previously allocated cells becomes unallocated.
+   - Return to step 3 and repeat until no further improvement is possible.
+
+5. **Calculate the Total Cost**
+   - Multiply each allocation by its corresponding transportation cost.
+   - Sum these products to get the total minimum transportation cost.
+
+## Example
+
+Consider a transportation problem with 3 sources and 3 destinations:
+
+Supply: S1 = 10, S2 = 15, S3 = 15
+Demand: D1 = 8, D2 = 17, D3 = 15
+
+Cost matrix:
+
+|    | D1 | D2 | D3 |
+|----|----|----|----| 
+| S1 | 6  | 8  | 10 |
+| S2 | 7  | 9  | 8  |
+| S3 | 4  | 6  | 9  |
+
+
+The problem is balanced because total supply (10 + 15 + 15 = 40) equals total demand (8 + 17 + 15 = 40).
+
+We can find an initial solution using the Northwest Corner Method, test for optimality using the Stepping Stone Method, and iteratively improve the solution until reaching optimality.
+
+The final solution would show the optimal allocation of goods from each source to each destination, minimizing the total transportation cost.
+
+
+
