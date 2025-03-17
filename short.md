@@ -746,11 +746,12 @@ Properties:
 - When present, the game has a stable solution in pure strategies
 - Both players' optimal strategies converge at this point
 - Named "saddle" because geometrically it resembles a horse saddle (minimum in one direction, maximum in another)
-
 Example: In a 3×3 game with payoff matrix:
+
 | 4 | 6 | 8 |
 | 7 | 5 | 3 |
 | 9 | 4 | 2 |
+
 Element 5 is a saddle point because it's minimum in its row (5 < 7) and maximum in its column (5 > 4).
 
 ### 3. What are the assumptions in Sequencing Problems?
