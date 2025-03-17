@@ -915,3 +915,232 @@ The final solution would show the optimal allocation of goods from each source t
 
 
 
+# Project Management Comprehensive Exam Solutions
+
+## Question 1: Solve a project scheduling problem using CPM.
+
+### CPM Problem Solution
+
+Let's solve a network diagram problem using the Critical Path Method (CPM). Consider a software development project with the following activities:
+
+| Activity | Description | Predecessor | Duration (days) |
+|----------|-------------|-------------|----------------|
+| A | Requirements gathering | - | 5 |
+| B | System design | A | 7 |
+| C | Database design | A | 4 |
+| D | Frontend development | B | 10 |
+| E | Backend development | B, C | 12 |
+| F | Integration testing | D, E | 6 |
+| G | User acceptance testing | F | 4 |
+| H | Deployment | G | 2 |
+
+#### Step 1: Draw the network diagram
+The network diagram would connect these activities according to their dependencies.
+
+#### Step 2: Calculate forward pass (Early Start/Early Finish)
+- **Activity A**: ES = 0, EF = 5
+- **Activity B**: ES = 5 (after A), EF = 12
+- **Activity C**: ES = 5 (after A), EF = 9
+- **Activity D**: ES = 12 (after B), EF = 22
+- **Activity E**: ES = 12 (after B since it's later than C), EF = 24
+- **Activity F**: ES = 24 (after E since it's later than D), EF = 30
+- **Activity G**: ES = 30 (after F), EF = 34
+- **Activity H**: ES = 34 (after G), EF = 36
+
+#### Step 3: Calculate backward pass (Late Start/Late Finish)
+- **Activity H**: LS = 34, LF = 36
+- **Activity G**: LS = 30, LF = 34
+- **Activity F**: LS = 24, LF = 30
+- **Activity E**: LS = 12, LF = 24
+- **Activity D**: LS = 14, LF = 24
+- **Activity C**: LS = 8, LF = 12
+- **Activity B**: LS = 5, LF = 12
+- **Activity A**: LS = 0, LF = 5
+
+#### Step 4: Calculate slack/float
+- **Activity A**: Slack = LS - ES = 0 - 0 = 0 (Critical)
+- **Activity B**: Slack = LS - ES = 5 - 5 = 0 (Critical)
+- **Activity C**: Slack = LS - ES = 8 - 5 = 3
+- **Activity D**: Slack = LS - ES = 14 - 12 = 2
+- **Activity E**: Slack = LS - ES = 12 - 12 = 0 (Critical)
+- **Activity F**: Slack = LS - ES = 24 - 24 = 0 (Critical)
+- **Activity G**: Slack = LS - ES = 30 - 30 = 0 (Critical)
+- **Activity H**: Slack = LS - ES = 34 - 34 = 0 (Critical)
+
+#### Step 5: Identify the critical path
+Critical path is A → B → E → F → G → H with a project duration of 36 days.
+
+#### Step 6: Project analysis
+- Project completion time: 36 days
+- Critical activities: A, B, E, F, G, H
+- Activities with float: C (3 days), D (2 days)
+- Resource allocation should prioritize critical activities
+- Any delay in critical activities will delay the entire project
+
+## Question 2: Explain the steps to construct a Network Diagram.
+
+### Steps to Construct a Network Diagram
+
+Network diagrams are essential tools in project management that visually represent the sequence, dependencies, and relationships between project activities. The construction of a network diagram follows systematic steps:
+
+#### 1. Activity Identification and Definition
+- List all activities required to complete the project
+- Assign a unique identifier (letter or number) to each activity
+- Define the scope and deliverables of each activity
+- Estimate the duration of each activity
+
+#### 2. Establish Activity Dependencies
+- For each activity, determine:
+  - Predecessor activities (must be completed before this activity can start)
+  - Successor activities (can only start after this activity is completed)
+- Identify dependency types:
+  - Finish-to-Start (FS): The most common, where a successor activity cannot start until its predecessor finishes
+  - Start-to-Start (SS): A successor activity cannot start until its predecessor starts
+  - Finish-to-Finish (FF): A successor activity cannot finish until its predecessor finishes
+  - Start-to-Finish (SF): A successor activity cannot finish until its predecessor starts
+
+#### 3. Choose a Network Diagram Method
+- **Activity-on-Node (AON)** / Precedence Diagramming Method (PDM):
+  - Activities are represented as nodes (boxes)
+  - Dependencies are shown as arrows connecting the nodes
+  - Most commonly used in modern project management
+- **Activity-on-Arrow (AOA)** / Arrow Diagramming Method (ADM):
+  - Activities are represented as arrows
+  - Events/milestones are shown as nodes
+  - Less common in contemporary practice
+
+#### 4. Draw the Initial Network Diagram
+- Place the start node (or activity) on the left
+- Arrange activities in logical sequence from left to right
+- Connect activities according to their dependencies using arrows
+- Ensure all activities are included in the network
+- Avoid loops or circular references in the network
+
+#### 5. Verify Network Logic
+- Check for dangling activities (activities with no predecessors or successors except start and end)
+- Ensure there are no illogical dependencies
+- Review for missing activities or dependencies
+- Validate the network with subject matter experts and stakeholders
+
+#### 6. Add Activity Information
+- Label each activity with:
+  - Activity ID/name
+  - Duration
+  - Resource requirements (optional)
+  - Cost information (optional)
+
+#### 7. Perform Time Analysis
+- Calculate early start (ES) and early finish (EF) times using forward pass
+- Calculate late start (LS) and late finish (LF) times using backward pass
+- Determine float or slack for each activity
+- Identify the critical path(s)
+
+#### 8. Refine and Finalize
+- Review the diagram for accuracy and completeness
+- Make necessary adjustments based on stakeholder feedback
+- Format the diagram for clarity and readability
+- Document assumptions and constraints
+
+#### 9. Network Diagram Best Practices
+- Keep the diagram simple and uncluttered
+- Use consistent formatting
+- Consider using software tools for complex projects
+- Update the diagram as the project progresses and changes occur
+- Include a legend explaining symbols and conventions used
+
+## Question 3: Differentiate between CPM and PERT with suitable examples.
+
+### Differentiation between CPM and PERT
+
+Critical Path Method (CPM) and Program Evaluation and Review Technique (PERT) are both project management methodologies used for planning, scheduling, and controlling projects. While they share similarities, they have distinct characteristics and applications.
+
+#### Fundamental Approach
+
+**CPM (Critical Path Method)**:
+- Deterministic approach using fixed time estimates
+- Focuses on activity times and project costs
+- Emphasizes the trade-off between time and cost
+- Better suited for routine, well-defined projects with predictable durations
+
+**PERT (Program Evaluation and Review Technique)**:
+- Probabilistic approach using multiple time estimates
+- Focuses on meeting schedules with uncertain activity times
+- Emphasizes time variability and risk analysis
+- Better suited for research and development or innovative projects with uncertain durations
+
+#### Time Estimation
+
+**CPM**:
+- Uses a single time estimate (most likely duration)
+- Example: Constructing a standard office building where activity durations are based on historical data:
+  - Foundation work: 14 days
+  - Structural framework: 30 days
+  - Roofing: 10 days
+
+**PERT**:
+- Uses three time estimates for each activity:
+  - Optimistic time (a): The minimum possible time
+  - Most likely time (m): The normal expected time
+  - Pessimistic time (b): The maximum possible time
+- Calculates Expected time (te) using the formula: te = (a + 4m + b) / 6
+- Example: Developing a new software product:
+  - Requirements gathering: a=3 days, m=5 days, b=10 days, te=(3+20+10)/6=5.5 days
+  - System design: a=7 days, m=10 days, b=19 days, te=(7+40+19)/6=11 days
+
+#### Statistical Analysis
+
+**CPM**:
+- No variance calculation
+- No probability analysis for completion times
+- Example: In a construction project, the critical path is determined solely based on fixed durations
+
+**PERT**:
+- Calculates variance for each activity: σ² = ((b-a)/6)²
+- Calculates standard deviation for project completion
+- Estimates probability of meeting deadlines
+- Example: In a spacecraft development project, PERT might indicate a 75% probability of completing within 24 months
+
+#### Network Representation
+
+**CPM**:
+- Traditionally uses Activity-on-Arrow (AOA) diagrams
+- Modern implementations often use Activity-on-Node (AON)
+- Example: In a building renovation project, activities like demolition, plumbing, electrical work, and finishing are represented with specific durations
+
+**PERT**:
+- Typically uses Activity-on-Node (AON) diagrams
+- Events (milestones) are emphasized
+- Example: In a product launch project, milestones like "design approval," "prototype testing complete," and "manufacturing setup complete" are highlighted
+
+#### Project Focus
+
+**CPM**:
+- Strong focus on cost-time optimization
+- Allows for crashing (expediting) activities by adding resources
+- Example: In a highway construction project, activities on the critical path can be crashed by adding more equipment and workers at additional cost
+
+**PERT**:
+- Strong focus on probability of meeting schedules
+- Better at handling uncertainties and managing risks
+- Example: In a pharmaceutical drug development project, PERT helps analyze the probability of completing clinical trials within regulatory timeframes
+
+#### Comparative Example: Office Building Construction vs. New Product Development
+
+**Office Building Construction (CPM Example)**:
+- Well-defined activities with known durations based on previous projects
+- Fixed sequence: Site preparation (7 days) → Foundation (14 days) → Structural framework (30 days) → Roofing (10 days) → Plumbing/Electrical (21 days) → Interior finishing (28 days) → Final inspection (3 days)
+- Critical path clearly defined with single time estimates
+- Focus on optimizing costs by efficient resource allocation
+
+**New Product Development (PERT Example)**:
+- Uncertain activities with variable durations:
+  - Market research: a=10 days, m=15 days, b=32 days, te=17 days
+  - Concept development: a=15 days, m=25 days, b=41 days, te=26 days
+  - Prototype building: a=20 days, m=30 days, b=58 days, te=33 days
+  - Testing: a=12 days, m=20 days, b=40 days, te=22 days
+  - Production setup: a=25 days, m=35 days, b=57 days, te=37 days
+- Probability analysis showing 65% chance of completing within 140 days
+- Focus on managing uncertainty and risk assessment
+
+## Question 4: Solve a PERT problem and determine the expected project duration.
+
