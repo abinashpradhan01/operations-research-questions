@@ -323,13 +323,31 @@ The Cost Matrix in the Hungarian Method is a fundamental component used for solv
 4. If number of lines < n, modify the matrix and repeat
 5. Make optimal assignments where reduced cost is zero
 
+
 **Example:**
 
-Original Cost Matrix:    Row-Reduced Matrix:    Fully Reduced Matrix:
-[ 10  5  9  18 ]         [ 5  0  4  13 ]        [ 5  0  4  13 ]
-[ 3  6  12  7  ]         [ 0  3  9  4  ]        [ 0  3  9  4  ]
-[ 20  8  9  10 ]         [ 12 0  1  2  ]        [ 12 0  1  2  ]
-[ 15  7  11  5 ]         [ 10 2  6  0  ]        [ 10 2  6  0  ]
+Original Cost Matrix:
+
+[ 10  5  9 18 ]
+[  3  6 12  7 ]
+[ 20  8  9 10 ]
+[ 15  7 11  5 ]
+
+
+Row-Reduced Matrix:
+
+[  5  0  4 13 ]
+[  0  3  9  4 ]
+[ 12  0  1  2 ]
+[ 10  2  6  0 ]
+
+
+Fully Reduced Matrix:
+
+[  5  0  4 13 ]
+[  0  3  9  4 ]
+[ 12  0  1  2 ]
+[ 10  2  6  0 ]
 
 
 ### Question 7: Explain how to balance an Unbalanced Transportation Problem.
