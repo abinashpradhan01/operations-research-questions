@@ -1144,3 +1144,197 @@ Critical Path Method (CPM) and Program Evaluation and Review Technique (PERT) ar
 
 ## Question 4: Solve a PERT problem and determine the expected project duration.
 
+# Project Management Exam Answers
+
+## Question 4: Solve a PERT problem and determine the expected project duration.
+
+### PERT Problem Solution
+
+To solve a Program Evaluation and Review Technique (PERT) problem, we need to:
+1. Identify all activities in the project
+2. Establish dependencies between activities
+3. Estimate three time durations for each activity:
+   - Optimistic time (a): Best-case scenario
+   - Most likely time (m): Most probable scenario
+   - Pessimistic time (b): Worst-case scenario
+4. Calculate the expected time (te) using the formula: te = (a + 4m + b) / 6
+5. Calculate the variance for each activity: σ² = ((b - a) / 6)²
+6. Determine the critical path
+7. Calculate the expected project duration by summing the expected times of activities on the critical path
+
+Let's solve a sample PERT problem:
+
+#### Given Information:
+| Activity | Predecessor | Optimistic (a) | Most Likely (m) | Pessimistic (b) |
+|----------|-------------|----------------|-----------------|-----------------|
+| A        | None        | 2              | 4               | 6               |
+| B        | None        | 3              | 5               | 7               |
+| C        | A           | 4              | 5               | 12              |
+| D        | B           | 2              | 5               | 8               |
+| E        | C           | 4              | 5               | 6               |
+| F        | C, D        | 3              | 6               | 9               |
+| G        | E, F        | 1              | 2               | 3               |
+
+#### Step 1: Calculate Expected Time (te) for Each Activity
+
+A: te = (2 + 4×4 + 6) / 6 = 4 days
+   σ² = ((6 - 2) / 6)² = 0.44
+
+B: te = (3 + 4×5 + 7) / 6 = 5 days
+   σ² = ((7 - 3) / 6)² = 0.44
+
+C: te = (4 + 4×5 + 12) / 6 = 6 days
+   σ² = ((12 - 4) / 6)² = 1.78
+
+D: te = (2 + 4×5 + 8) / 6 = 5 days
+   σ² = ((8 - 2) / 6)² = 1.00
+
+E: te = (4 + 4×5 + 6) / 6 = 5 days
+   σ² = ((6 - 4) / 6)² = 0.11
+
+F: te = (3 + 4×6 + 9) / 6 = 6 days
+   σ² = ((9 - 3) / 6)² = 1.00
+
+G: te = (1 + 4×2 + 3) / 6 = 2 days
+   σ² = ((3 - 1) / 6)² = 0.11
+
+#### Step 2: Determine the Critical Path
+
+Let's analyze the possible paths:
+- Path 1: A → C → E → G = 4 + 6 + 5 + 2 = 17 days
+- Path 2: A → C → F → G = 4 + 6 + 6 + 2 = 18 days
+- Path 3: B → D → F → G = 5 + 5 + 6 + 2 = 18 days
+
+Both Path 2 and Path 3 are tied for the longest duration (18 days). Since both paths have the same expected duration, both are critical paths.
+
+#### Step 3: Calculate the Expected Project Duration
+
+The expected project duration is 18 days, which is the sum of the expected times of activities on the critical path.
+
+#### Step 4: Calculate the Project Variance and Standard Deviation
+
+For Path 2: A → C → F → G
+Project Variance = 0.44 + 1.78 + 1.00 + 0.11 = 3.33
+Project Standard Deviation = √3.33 = 1.83 days
+
+For Path 3: B → D → F → G
+Project Variance = 0.44 + 1.00 + 1.00 + 0.11 = 2.55
+Project Standard Deviation = √2.55 = 1.60 days
+
+Since both paths are critical, we should use the path with the higher variance (Path 2) for calculating the probability of completing the project by a certain date.
+
+#### Step 5: Probability Calculations
+
+For a specific target date, we can calculate the probability of completing the project by that date using the normal distribution:
+- Z = (Target date - Expected duration) / Standard deviation
+- Look up the corresponding probability in a standard normal table
+
+For example, to find the probability of completing the project in 20 days:
+Z = (20 - 18) / 1.83 = 1.09
+Using a standard normal table, the probability is approximately 86.2%
+
+### Conclusion
+
+The expected project duration is 18 days, with a standard deviation of 1.83 days. This means that there is a 50% chance of completing the project within 18 days. The probability of completing the project increases as we extend the target date beyond 18 days. Project managers should use this information to establish realistic project timelines and manage stakeholder expectations.
+
+## Question 5: Discuss the significance of Critical Path and Float in project management.
+
+### Critical Path: Definition and Significance
+
+The critical path is the sequence of activities in a project that determines the minimum time needed to complete the entire project. It is comprised of activities that have zero float (or slack), meaning any delay in these activities will directly delay the project completion date.
+
+#### Significance of Critical Path:
+
+1. **Project Duration Determination**: 
+   The critical path directly defines the minimum possible duration of the project. Project managers can immediately identify the earliest possible completion date by analyzing the critical path.
+
+2. **Resource Allocation and Prioritization**:
+   Activities on the critical path require careful resource allocation and prioritization. Project managers must ensure that resources are available when needed for critical activities to prevent project delays.
+
+3. **Risk Management**:
+   Critical path activities represent the highest risk to the project schedule. Identifying these activities allows project managers to implement targeted risk mitigation strategies and contingency plans.
+
+4. **Schedule Compression**:
+   When project acceleration is necessary, the critical path indicates which activities should be targeted for schedule compression techniques such as crashing (adding resources) or fast-tracking (parallel execution).
+
+5. **Project Monitoring and Control**:
+   The critical path provides a focused framework for monitoring project progress. Project managers can concentrate their attention on critical activities to ensure the project remains on schedule.
+
+6. **Decision Making**:
+   When conflicts arise regarding resource allocation or priority, the critical path provides clear guidance on which activities should receive precedence.
+
+7. **Stakeholder Communication**:
+   The critical path helps in communicating project status and potential delays to stakeholders, allowing for more effective expectation management.
+
+### Float (Slack): Definition and Significance
+
+Float, also known as slack, is the amount of time an activity can be delayed without affecting the project completion date. It represents the scheduling flexibility available for non-critical activities.
+
+#### Types of Float:
+
+1. **Total Float**:
+   The amount of time an activity can be delayed without delaying the project completion date.
+
+2. **Free Float**:
+   The amount of time an activity can be delayed without delaying the early start of any successor activity.
+
+3. **Independent Float**:
+   The amount of time an activity can be delayed without being constrained by the late finish of predecessor activities and without affecting the early start of successor activities.
+
+#### Significance of Float:
+
+1. **Scheduling Flexibility**:
+   Float provides flexibility in scheduling activities, allowing project managers to optimize resource utilization across the project.
+
+2. **Resource Leveling**:
+   Activities with float can be rescheduled to balance resource demands and avoid resource overallocation without affecting the project timeline.
+
+3. **Opportunity for Optimization**:
+   Float allows project managers to optimize costs by potentially using less expensive resources or methods for non-critical activities.
+
+4. **Buffer for Uncertainties**:
+   Float acts as a buffer against uncertainties in activity duration estimates, providing a safety margin for non-critical activities.
+
+5. **Priority Determination**:
+   Activities with less float generally require higher priority than those with more float, helping project managers establish clear priorities.
+
+6. **Identification of Near-Critical Paths**:
+   Activities with minimal float indicate near-critical paths that could become critical if minor delays occur.
+
+7. **Enhanced Project Control**:
+   Understanding float allows project managers to make informed decisions about where to allow delays and where to enforce strict adherence to schedules.
+
+### Relationship Between Critical Path and Float
+
+The critical path and float are interrelated concepts in project management:
+
+- Activities on the critical path have zero float (no slack)
+- Changes in the critical path affect the total float of non-critical activities
+- As activities consume their float, they may become critical
+- Multiple critical paths can exist in a project, all with zero float
+- The critical path can change throughout the project lifecycle as activities consume or gain float
+
+### Practical Applications in Project Management
+
+1. **Schedule Development**:
+   Project managers use critical path analysis to develop realistic project schedules and identify potential bottlenecks.
+
+2. **Resource Management**:
+   Understanding which activities are critical and which have float allows for optimal resource allocation and smoothing.
+
+3. **Progress Tracking**:
+   Regular updates to the critical path and float calculations help project managers track progress and identify potential schedule slippage.
+
+4. **Schedule Recovery**:
+   When delays occur, knowledge of the critical path and float helps in developing effective schedule recovery plans.
+
+5. **Scenario Analysis**:
+   Project managers can use critical path and float calculations to model different scenarios and assess their impact on project duration.
+
+### Conclusion
+
+Critical path and float are fundamental concepts in project management that provide valuable insights for effective schedule planning, resource management, and project control. The critical path identifies the sequence of activities that determine the minimum project duration, while float indicates the scheduling flexibility available for non-critical activities.
+
+By understanding and actively managing the critical path and float, project managers can optimize project schedules, prioritize resources effectively, and increase the likelihood of project success. These concepts form the foundation of advanced project management techniques such as Critical Chain Project Management (CCPM) and Agile methodologies, which further refine the approach to managing project schedules and resources.
+
+In today's complex project environments, sophisticated project management software tools automate critical path and float calculations, allowing project managers to focus on strategic decision-making rather than manual calculations. However, the fundamental understanding of these concepts remains essential for effective project management practice.
