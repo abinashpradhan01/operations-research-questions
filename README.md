@@ -466,3 +466,278 @@ The company should produce 30 chairs and 40 tables weekly to maximize profit, re
 3. **Complexity:** Becomes unwieldy with a large number of constraints.
 
 For problems with more than two variables, other methods like the Simplex Method are more appropriate.
+
+
+
+# Transportation Problem Methods: Detailed Answers
+
+## Question 1: Solve a Transportation Problem using Vogel's Approximation Method
+
+Vogel's Approximation Method (VAM) is a heuristic algorithm used to find an initial basic feasible solution for transportation problems. It generally produces better initial solutions than other methods by considering opportunity costs.
+
+### Step-by-Step Procedure for VAM:
+
+1. Calculate penalty for each row and column by finding the difference between the two lowest costs in that row or column
+2. Identify the row or column with the highest penalty
+3. Allocate the maximum possible amount to the lowest cost cell in that row or column
+4. Adjust supply and demand accordingly
+5. Eliminate rows or columns with zero supply or demand
+6. Repeat steps 1-5 until all allocations are made
+
+### Numerical Example:
+
+Consider the following transportation problem:
+
+|          | Warehouse 1 | Warehouse 2 | Warehouse 3 | Supply |
+|----------|-------------|-------------|-------------|--------|
+| Factory A| 6           | 4           | 1           | 50     |
+| Factory B| 3           | 8           | 7           | 40     |
+| Factory C| 4           | 4           | 2           | 60     |
+| Demand   | 20          | 95          | 35          | 150    |
+
+First, let's check if this is a balanced problem:
+Total Supply = 50 + 40 + 60 = 150
+Total Demand = 20 + 95 + 35 = 150
+
+Since supply equals demand, the problem is balanced.
+
+### Initial Penalties:
+
+**Row Penalties:**
+- Row A: |4-1| = 3
+- Row B: |3-7| = 4
+- Row C: |4-2| = 2
+
+**Column Penalties:**
+- Column 1: |3-4| = 1
+- Column 2: |4-4| = 0
+- Column 3: |1-2| = 1
+
+The highest penalty is 4 in Row B. The minimum cost in Row B is 3 (at B1), so we allocate min(40, 20) = 20 units to cell B1.
+
+Updated table (after first allocation):
+
+|          | Warehouse 1 | Warehouse 2 | Warehouse 3 | Supply |
+|----------|-------------|-------------|-------------|--------|
+| Factory A| 6           | 4           | 1           | 50     |
+| Factory B| 3 [20]      | 8           | 7           | 20     |
+| Factory C| 4           | 4           | 2           | 60     |
+| Demand   | 0           | 95          | 35          | 130    |
+
+Since Column 1 demand is now 0, we eliminate it and recalculate penalties.
+
+**Row Penalties:**
+- Row A: |4-1| = 3
+- Row B: |8-7| = 1
+- Row C: |4-2| = 2
+
+**Column Penalties:**
+- Column 2: |4-4| = 0
+- Column 3: |1-2| = 1
+
+Highest penalty is 3 in Row A. The minimum cost cell is A3 (cost 1), so we allocate min(50, 35) = 35 units.
+
+Continuing in this manner for subsequent iterations:
+
+**After second allocation:**
+
+|          | Warehouse 2 | Warehouse 3 | Supply |
+|----------|-------------|-------------|--------|
+| Factory A| 4           | 1 [35]      | 15     |
+| Factory B| 8           | 7           | 20     |
+| Factory C| 4           | 2           | 60     |
+| Demand   | 95          | 0           | 95     |
+
+**After third allocation:**
+We allocate 15 units to A2, 20 units to B2, and 60 units to C2, completing the solution.
+
+**Final allocation:**
+- A1 = 0, A2 = 15, A3 = 35
+- B1 = 20, B2 = 20, B3 = 0
+- C1 = 0, C2 = 60, C3 = 0
+
+**Total transportation cost:**
+= 0×6 + 15×4 + 35×1 + 20×3 + 20×8 + 0×7 + 0×4 + 60×4 + 0×2
+= 0 + 60 + 35 + 60 + 160 + 0 + 0 + 240 + 0
+= 555
+
+Therefore, the minimum cost using VAM is 555 units.
+
+## Question 2: Explain the Hungarian Method with a Numerical Example
+
+The Hungarian Method is an optimization algorithm used to solve assignment problems, which are special cases of transportation problems where each source must be assigned to exactly one destination, and each destination must be assigned exactly one source.
+
+### Step-by-Step Procedure for Hungarian Method:
+
+1. **Row Reduction**: Subtract the smallest element in each row from all elements in that row
+2. **Column Reduction**: Subtract the smallest element in each column from all elements in that column
+3. **Line Drawing**: Draw minimum number of horizontal and vertical lines to cover all zeros in the matrix
+4. **Optimality Test**: If the number of lines equals n (matrix dimension), optimal assignment is possible
+5. **Matrix Modification**: If number of lines < n, find smallest uncovered element, subtract it from all uncovered elements, add it to elements at line intersections, and return to step 3
+6. **Assignment**: Make assignments in the reduced matrix to cells with zeros, ensuring one assignment per row and column
+
+### Numerical Example:
+
+Consider an assignment problem where 4 workers need to be assigned to 4 jobs. The cost matrix indicates the cost of assigning each worker to each job:
+
+```
+    Job1  Job2  Job3  Job4
+W1   12    7     14    7
+W2   8     5     7     9
+W3   15    12    7     10
+W4   10    9     11    5
+```
+
+### Step 1: Row Reduction
+Subtract the minimum element of each row from all elements in that row:
+
+```
+    Job1  Job2  Job3  Job4
+W1   5     0     7     0
+W2   3     0     2     4
+W3   8     5     0     3
+W4   5     4     6     0
+```
+
+### Step 2: Column Reduction
+Subtract the minimum element of each column from all elements in that column:
+
+```
+    Job1  Job2  Job3  Job4
+W1   2     0     7     0
+W2   0     0     2     4
+W3   5     5     0     3
+W4   2     4     6     0
+```
+
+### Step 3: Line Drawing
+Draw minimum number of lines to cover all zeros:
+- Line through row 2 (covers zeros in Job1 and Job2)
+- Line through column 2 (covers zero in W1)
+- Line through column 4 (covers zero in W4)
+- Line through column 3 (covers zero in W3)
+
+Total: 4 lines = n, so we can make an optimal assignment.
+
+### Step 4: Make Optimal Assignment
+
+Make assignments to cells with zeros, ensuring one per row and column:
+- Worker 1 → Job 2 (cost 7)
+- Worker 2 → Job 1 (cost 8)
+- Worker 3 → Job 3 (cost 7)
+- Worker 4 → Job 4 (cost 5)
+
+Total cost: 7 + 8 + 7 + 5 = 27
+
+If we had fewer lines than n in step 3, we would need to:
+1. Find the smallest uncovered element
+2. Subtract it from all uncovered elements
+3. Add it to elements at intersections of lines
+4. Return to step 3
+
+### Key Features of Hungarian Method:
+
+1. Always provides an optimal solution
+2. Well-suited for assignment problems with n×n cost matrix
+3. Works with both minimization and maximization problems (for maximization, convert to minimization by subtracting each element from the largest element)
+4. Computational complexity is O(n³)
+5. Can handle unbalanced problems by adding dummy rows/columns
+
+The Hungarian Method is particularly valuable because it guarantees optimality, unlike heuristic approaches used for initial solutions in general transportation problems.
+
+## Question 3: Compare and Contrast the N.W. Corner Rule and Least Cost Method
+
+Both the Northwest Corner Rule and the Least Cost Method are techniques to find initial basic feasible solutions for transportation problems. While they share this common purpose, they differ significantly in their approach and efficiency.
+
+### Northwest Corner Rule
+
+#### Procedure:
+1. Start at the top-left (northwest) corner of the transportation table
+2. Allocate the maximum possible amount (min of supply and demand)
+3. Cross out the satisfied row or column
+4. Move to the next available cell (to the right if column satisfied, down if row satisfied)
+5. Repeat until all allocations are made
+
+#### Characteristics:
+- **Simplicity**: Extremely simple to implement manually or programmatically
+- **Speed**: Very fast computation time
+- **Cost Consideration**: Completely ignores transportation costs during allocation
+- **Solution Quality**: Generally produces poor-quality initial solutions
+- **Systematic Approach**: Follows a rigid pattern of cell selection
+
+#### Mathematical Foundation:
+The N.W. Corner Rule focuses solely on the constraint satisfaction rather than objective function optimization. It ensures:
+- All supply constraints are met: Σj xij = ai for all i
+- All demand constraints are met: Σi xij = bj for all j
+- Non-negativity: xij ≥ 0 for all i,j
+
+### Least Cost Method
+
+#### Procedure:
+1. Identify the cell with the lowest transportation cost in the entire table
+2. Allocate the maximum possible amount to this cell
+3. Cross out the satisfied row or column
+4. Repeat the process with the next lowest cost cell among the remaining cells
+5. Continue until all allocations are made
+
+#### Characteristics:
+- **Cost Sensitivity**: Directly considers transportation costs for allocation decisions
+- **Complexity**: Moderately complex to implement manually (requires scanning the entire table repeatedly)
+- **Speed**: Less efficient computationally than N.W. Corner Rule
+- **Solution Quality**: Typically produces better initial solutions than N.W. Corner Rule
+- **Flexible Approach**: Cell selection follows cost patterns rather than positional constraints
+
+#### Mathematical Foundation:
+The Least Cost Method attempts to minimize the objective function Z = ΣiΣj cij·xij while satisfying the same constraints as the N.W. Corner Rule.
+
+### Detailed Comparison:
+
+| Aspect | N.W. Corner Rule | Least Cost Method |
+|--------|------------------|-------------------|
+| **Selection Criterion** | Position in table | Transportation cost |
+| **Computational Complexity** | O(m+n-1) | O((m×n)²) |
+| **Solution Quality** | Poor, often far from optimal | Moderate, closer to optimal |
+| **Use Case** | When speed is critical, or as a teaching tool | When better initial solutions are needed |
+| **Sensitivity to Cost Matrix** | None (will give same allocation regardless of costs) | High (allocation pattern changes with cost matrix) |
+| **Implementation Difficulty** | Very easy | Moderate |
+| **Number of Iterations for Optimality** | Typically requires more iterations in subsequent optimization | Typically requires fewer iterations in subsequent optimization |
+
+### Numerical Comparison Example:
+
+Consider this transportation problem:
+
+|          | D1 | D2 | D3 | Supply |
+|----------|----|----|----|----|
+| S1       | 2  | 3  | 11 | 15 |
+| S2       | 1  | 0  | 6  | 25 |
+| S3       | 5  | 8  | 15 | 10 |
+| Demand   | 20 | 20 | 10 | 50 |
+
+#### N.W. Corner Solution:
+- Allocate 15 units to (1,1)
+- Allocate 5 units to (2,1)
+- Allocate 20 units to (2,2)
+- Allocate 10 units to (3,3)
+
+Total cost = 15×2 + 5×1 + 20×0 + 10×15 = 30 + 5 + 0 + 150 = 185
+
+#### Least Cost Solution:
+- Allocate 20 units to (2,2) (cost 0)
+- Allocate 5 units to (2,1) (cost 1)
+- Allocate 15 units to (1,1) (cost 2)
+- Allocate 10 units to (3,3) (cost 15)
+
+Total cost = 20×0 + 5×1 + 15×2 + 10×15 = 0 + 5 + 30 + 150 = 185
+
+In this particular example, both methods produce the same total cost, but this is coincidental. In most practical problems, the Least Cost Method will produce a better initial solution than the N.W. Corner Rule.
+
+### Theoretical Integration:
+
+Both methods produce basic feasible solutions with exactly m+n-1 positive allocations (where m is the number of sources and n is the number of destinations). This property is critical for subsequent optimization methods like MODI (Modified Distribution) or Stepping Stone to work properly.
+
+The key trade-off is between computational simplicity (favoring N.W. Corner) and solution quality (favoring Least Cost). In practice, for large-scale problems, the initial solution quality becomes more important as it reduces the computational burden of subsequent optimization steps.
+
+
+
+
+
