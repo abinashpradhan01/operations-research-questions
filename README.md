@@ -1,4 +1,4 @@
-# operations-research-questions
+# Operations-Research-Questions
 
 # Linear Programming Problems: Comprehensive Answers
 
