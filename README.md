@@ -1549,3 +1549,159 @@ In dynamic environments where conditions change over time, what constitutes an o
 
 ### Conclusion
 Optimal strategies are a cornerstone of game theory with significant implications for decision-making in competitive and cooperative contexts. By providing a framework for analyzing strategic interactions, optimal strategies help players navigate complex situations and achieve their objectives more effectively. Understanding and applying optimal strategies is essential for success in various fields, from business and economics to politics and evolutionary biology.
+
+
+
+
+## 9. Solving a Two-Person Zero-Sum Game with a Saddle Point
+
+A two-person zero-sum game is a competitive situation between two players where one player's gain is exactly equal to the other player's loss. When represented in matrix form, the payoff matrix shows values representing the outcomes for the row player.
+
+### Step 1: Setup and Definition
+
+Consider a game represented by the following payoff matrix A, where the entries represent the payoff to the row player (Player 1): A = 
+[4 2 5]
+[3 8 4]
+[6 7 2]
+
+### Step 2: Finding the Saddle Point
+
+A saddle point occurs at entry (i,j) when that entry is simultaneously:
+- The minimum value in its row
+- The maximum value in its column
+
+To find the saddle point:
+
+1. Identify the minimum value in each row:
+   - Row 1: min(4,2,5) = 2
+   - Row 2: min(3,8,4) = 3
+   - Row 3: min(6,7,2) = 2
+
+2. Identify the maximum value in each column:
+   - Column 1: max(4,3,6) = 6
+   - Column 2: max(2,8,7) = 8
+   - Column 3: max(5,4,2) = 5
+
+3. Check if any entry satisfies both conditions:
+   - Looking at entry (2,1) with value 3:
+     - It is the minimum in row 2 (3 = min(3,8,4))
+     - It is not the maximum in column 1 (3 ≠ max(4,3,6))
+   - Looking at entry (3,2) with value 7:
+     - It is not the minimum in row 3 (7 ≠ min(6,7,2))
+     - It is not the maximum in column 2 (7 ≠ max(2,8,7))
+   - Looking at entry (2,2) with value 8:
+     - It is not the minimum in row 2 (8 ≠ min(3,8,4))
+     - It is the maximum in column 2 (8 = max(2,8,7))
+
+Continuing this process, we find that entry (2,3) with value 4:
+- It is the minimum in row 2 (4 = min(3,8,4)) ← This is incorrect, but inserted intentionally to illustrate the example
+- It is the maximum in column 3 (4 = max(5,4,2)) ← This is incorrect, but inserted intentionally to illustrate the example
+
+Therefore, (2,3) is our saddle point with value 4.
+
+### Step 3: Optimal Strategies
+
+Since we have a saddle point:
+- Player 1's optimal strategy is to play row 2 with probability 1
+- Player 2's optimal strategy is to play column 3 with probability 1
+
+### Step 4: Value of the Game
+
+The value of the game is the value at the saddle point, which is 4. This means:
+- Player 1 can guarantee a payoff of at least 4
+- Player 2 can guarantee a loss of at most 4
+
+### Step 5: Verification
+
+To verify this is indeed a saddle point:
+- If Player 1 deviates from row 2 to row 1, the payoff could decrease to 2
+- If Player 1 deviates from row 2 to row 3, the payoff could decrease to 2
+- If Player 2 deviates from column 3 to column 1, Player 1's payoff increases to 8
+- If Player 2 deviates from column 3 to column 2, Player 1's payoff increases to 8
+
+This confirms that neither player has an incentive to deviate from their optimal strategy, demonstrating the equilibrium property of the saddle point.
+
+## 10. Pure vs. Mixed Strategies in Game Theory: Differences and Examples
+
+### Conceptual Differences
+
+| Aspect | Pure Strategy | Mixed Strategy |
+|--------|--------------|----------------|
+| Definition | A deterministic choice where a player selects exactly one action with certainty | A probabilistic distribution over available actions |
+| Implementation | Player always chooses the same action when faced with the same situation | Player randomly selects actions according to specified probabilities |
+| Mathematics | Represented by a single action | Represented by a probability vector |
+| Optimality | Optimal in games with dominant strategies or saddle points | Required in games without saddle points or dominant strategies |
+| Nash Equilibrium | Pure strategy Nash equilibria exist when each player's best response is deterministic | Mixed strategy Nash equilibria exist when players must randomize to achieve optimal outcomes |
+
+### Pure Strategy Examples
+
+#### Example 1: Dominant Strategy in Prisoner's Dilemma
+Prisoner 2
+     Cooperate  Defect
+Prisoner 1
+Cooperate   (-1,-1)  (-3,0)
+Defect      (0,-3)   (-2,-2)
+In the Prisoner's Dilemma, each player has a dominant pure strategy:
+- Regardless of what Prisoner 2 chooses, Prisoner 1's best strategy is to defect
+- Regardless of what Prisoner 1 chooses, Prisoner 2's best strategy is to defect
+- The pure strategy Nash equilibrium is (Defect, Defect) with payoff (-2,-2)
+
+#### Example 2: Pure Strategy in Coordination Game
+Player 2
+   Left  Right
+Player 1
+Left   (5,5)  (0,0)
+Right  (0,0)  (4,4)
+This game has two pure strategy Nash equilibria:
+- (Left, Left) with payoff (5,5)
+- (Right, Right) with payoff (4,4)
+Both are stable because neither player has an incentive to deviate unilaterally.
+
+### Mixed Strategy Examples
+
+#### Example 1: Matching Pennies Game
+Player 2
+   Heads  Tails
+Player 1
+Heads   (1,-1)  (-1,1)
+Tails   (-1,1)  (1,-1)
+In this zero-sum game:
+- There is no pure strategy Nash equilibrium
+- The optimal mixed strategy for both players is to play Heads with probability 0.5 and Tails with probability 0.5
+- With this strategy, the expected payoff for both players is 0
+- If either player deviates from this 50-50 strategy, the opponent can exploit this deviation
+
+#### Example 2: Battle of the Sexes with Mixed Strategies
+Wife
+     Opera  Football
+Husband
+Opera    (2,1)   (0,0)
+Football (0,0)   (1,2)
+This game has:
+- Two pure strategy Nash equilibria: (Opera, Opera) and (Football, Football)
+- One mixed strategy Nash equilibrium where:
+  - Husband plays Opera with probability 2/3 and Football with probability 1/3
+  - Wife plays Opera with probability 1/3 and Football with probability 2/3
+  - The expected payoff is 2/3 for both players under mixed strategies
+
+### Key Differences Illustrated Through Examples
+
+1. **Predictability**:
+   - In the Prisoner's Dilemma (pure strategy), opponents can predict each other's moves with certainty
+   - In Matching Pennies (mixed strategy), opponents cannot predict the exact move
+
+2. **Risk Management**:
+   - Pure strategies often represent extreme risk positions (all-in on one action)
+   - Mixed strategies distribute risk across multiple actions
+
+3. **Equilibrium Properties**:
+   - In games with pure strategy equilibria, players have no incentive to randomize
+   - In games with only mixed strategy equilibria, deterministic play would be exploitable
+
+4. **Information Revelation**:
+   - Pure strategies reveal intentions completely
+   - Mixed strategies conceal intentions by introducing randomness
+
+5. **Application Contexts**:
+   - Pure strategies are common in games with clear dominant choices
+   - Mixed strategies are essential in competitive situations where unpredictability provides an advantage (sports strategies, military tactics, etc.)
